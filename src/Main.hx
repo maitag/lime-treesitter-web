@@ -31,8 +31,8 @@ class Main extends lime.app.Application {
 					this.treeSitterHaxe(haxeParser);
 				});
 				
-				const glslParser = new Parser;
 				// loading the glsl grammar
+				const glslParser = new Parser;
 				Parser.Language.load('lib/tree-sitter-glsl.wasm').then ( (language) => {
 					glslParser.setLanguage(language);
 					this.treeSitterGLSL(glslParser);
@@ -53,7 +53,7 @@ class Main extends lime.app.Application {
 	
 	// callbacks after the language-parsers is ready to use
 
-	// ----- testing glsl parsing ---------
+	// ----- testing haxe parsing ---------
 
 	public function treeSitterHaxe(parser:Dynamic) {
 	
