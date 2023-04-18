@@ -23,8 +23,8 @@ class Main extends lime.app.Application {
 			Parser.init().then( () => {
 				const parser = new Parser;
 				// loading the language grammar (js into this case)
-				const JavaScript = Parser.Language.load('lib/tree-sitter-javascript.wasm').then ( (JavaScript) => {
-					parser.setLanguage(JavaScript);
+				const glsl = Parser.Language.load('lib/tree-sitter-glsl.wasm').then ( (GLSL) => {
+					parser.setLanguage(GLSL);
 					this.treeSitterIsReady(parser);
 				});
 			});
@@ -35,7 +35,7 @@ class Main extends lime.app.Application {
 	
 	public function treeSitterIsReady(parser:Dynamic) {
 		
-		//trace("ready", parser);
+		// trace("ready", parser);
 		
 		var sourceCode = 'let x = 1; console.log(x);';
 		
