@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Testing Trisitter" package="de.peote.trisitter" version="1.0.0" company="semmi" />
+	
+	<app main="Main" path="bin" file="TestTrisitter" />
+	
+	<source path="src" />
+	
+	<haxelib name="lime" />
+	
+	
+	
+	<!-- Treesitter settings -->
+	
+	<dependency if="html5" path="dependencies/tree-sitter.js" />
+	
+	<!-- to copy the .wasm files for treesitter also inside the lib folder -->
+	
+	<assets if="html5" path="assets/wasm" rename="lib" />
+	
+	
+</project>
