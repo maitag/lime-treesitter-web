@@ -24,14 +24,12 @@ class Main extends lime.app.Application {
 			
 			Parser.init().then( () => {
 				
-				
-				// loading the javascript grammar
-				const jsParser = new Parser;
-				Parser.Language.load('lib/tree-sitter-glsl.wasm').then ( (language) => {
-					jsParser.setLanguage(language);
-					this.treeSitterJS(jsParser);
+				// loading the haxe grammar
+				const haxeParser = new Parser;
+				Parser.Language.load('lib/tree-sitter-haxe.wasm').then ( (language) => {
+					haxeParser.setLanguage(language);
+					this.treeSitterHaxe(haxeParser);
 				});
-				
 				
 				const glslParser = new Parser;
 				// loading the glsl grammar
@@ -40,6 +38,12 @@ class Main extends lime.app.Application {
 					this.treeSitterGLSL(glslParser);
 				});
 				
+				// loading the javascript grammar
+				const jsParser = new Parser;
+				Parser.Language.load('lib/tree-sitter-javascript.wasm').then ( (language) => {
+					jsParser.setLanguage(language);
+					this.treeSitterJS(jsParser);
+				});
 				
 			});
 			
@@ -48,6 +52,41 @@ class Main extends lime.app.Application {
 	}
 	
 	// callbacks after the language-parsers is ready to use
+
+	// ----- testing glsl parsing ---------
+
+	public function treeSitterHaxe(parser:Dynamic) {
+	
+		// trace("ready", parser);
+		
+		var sourceCode = 'var x:Float = 100.0;';
+		
+		trace(sourceCode);
+		
+		var tree = parser.parse(sourceCode);
+		
+		//js.Syntax.code("console.log(tree);");
+		trace( tree.rootNode.toString() );
+	
+	}
+
+	// ----- testing glsl parsing ---------
+	
+	public function treeSitterGLSL(parser:Dynamic) {
+		
+		// trace("ready", parser);
+		
+		var sourceCode = 'vec3 xyz;';
+		
+		trace(sourceCode);
+
+		var tree = parser.parse(sourceCode);
+		
+		//js.Syntax.code("console.log(tree);");
+		trace( tree.rootNode.toString() );
+	
+	}
+	
 	
 	// ----- testing javascript parsing ---------
 	
@@ -56,6 +95,8 @@ class Main extends lime.app.Application {
 		// trace("ready", parser);
 		
 		var sourceCode = 'let x = 1; console.log(x);';
+		
+		trace(sourceCode);
 		
 		var tree = parser.parse(sourceCode);
 		
@@ -81,22 +122,5 @@ class Main extends lime.app.Application {
 		var newTree = parser.parse(newSourceCode, tree);
 		trace( newTree.rootNode.toString() );
 	}
-	
-
-	// ----- testing glsl parsing ---------
-	
-	public function treeSitterGLSL(parser:Dynamic) {
-		
-		// trace("ready", parser);
-		
-		var sourceCode = 'vec3 xyz;';
-		
-		var tree = parser.parse(sourceCode);
-		
-		//js.Syntax.code("console.log(tree);");
-		trace( tree.rootNode.toString() );
-	
-	}
-	
 	
 }
